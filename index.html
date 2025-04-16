@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Parking Status</title>
+</head>
+<body>
+  <h1>Parking Spot Status</h1>
+  <div id="status"></div>
+
+  <script>
+    async function fetchStatus() {
+      const res = await fetch('http://localhost:5000/status');
+      const data = await res.json();
+      document.getElementById("status").innerHTML =
+        `<p>Total Spots: ${data.total_spots}</p>
+         <p>Free Spots: ${data.free_spots}</p>
+         <p>Occupied Spots: ${data.occupied_spots}</p>`;
+    }
+
+    setInterval(fetchStatus, 3000); // 3 секунд тутамд шинэчилнэ
+    fetchStatus();
+  </script>
+</body>
+</html>
